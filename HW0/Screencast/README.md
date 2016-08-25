@@ -8,3 +8,5 @@ A general guideline: Do whatever it would do if you were teaching someone how to
 
 
 >The screencast was made on [Linux Mint](https://www.linuxmint.com/) using [`Kazam`](https://launchpad.net/kazam)
+
+The video can also be found at ![Unable to load](https://www.youtube.com/watch?v=xOWM0G3io4M&feature=youtu.be)
