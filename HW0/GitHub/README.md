@@ -7,4 +7,4 @@ Sign into [NCSU's GitHub](https://github.ncsu.edu/).
 
 --------
 ##### Github profile + collaborators
-![Unable to load image](git_collab.png)
+![Unable to load image](Screenshot_20160825-191313.png)
