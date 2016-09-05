@@ -15,7 +15,8 @@ var urlRoot = "https://github.ncsu.edu/api/v3";
 
 //getYourRepos(userId);
 //listBranches(userId, "HW1");
-createRepo("SW_Sample", "Sample repo created for HW1", "www.google.com", true);
+//createRepo("SW_Sample", "Sample repo created for HW1", "www.google.com", true);
+createIssue(userId, "SW_Sample", "Sample Issue", "This is a sample issue");
 
 /**
  * Module to get all repositories for the authenticated user
@@ -151,6 +152,39 @@ function deleteRepo(owner, name, next) {
             console.log("Repository deleted successfully");
             if (next != null) {
                 next();
+            }
+        }
+    });
+}
+
+/**
+ * Module to create an issue to the given repository
+ * @param owner
+ * @param repo
+ * @param title
+ * @param body
+ */
+function createIssue(owner, repo, title, body) {
+    var options = {
+        url: urlRoot + "/repos/" + owner + "/" + repo + "/issues",
+        method: 'POST',
+        headers: {
+            "User-Agent": "sekhar-webstorm-client",
+            "content-type": "application/json",
+            "Authorization": token
+        },
+        json: {
+            "title": title,
+            "body": body
+        }
+    };
+
+    // Send a http request to url and specify a callback that will be called upon its return.
+    request(options, function (error, response, body) {
+        console.log("Issue created successfully");
+        if (error == null) {
+            if (typeof body === "object") {
+                console.log(body)
             }
         }
     });
