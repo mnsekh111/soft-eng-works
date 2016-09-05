@@ -14,8 +14,8 @@ var userId = "smnatara";
 var urlRoot = "https://github.ncsu.edu/api/v3";
 
 //getYourRepos(userId);
-listBranches(userId, "HW1");
-//createRepo();
+//listBranches(userId, "HW1");
+createRepo("SW_Sample", "Sample repo created for HW1", "www.google.com", true);
 
 /**
  * Module to get all repositories for the authenticated user
@@ -27,7 +27,7 @@ function getYourRepos(userName) {
         url: urlRoot + '/user/repos',
         method: 'GET',
         headers: {
-            "User-Agent": "EnableIssues",
+            "User-Agent": "sekhar-webstorm-client",
             "content-type": "application/json",
             "Authorization": token
         }
@@ -54,7 +54,7 @@ function listBranches(owner, repo) {
         url: urlRoot + "/repos/" + owner + "/" + repo + "/" + "branches",
         method: 'GET',
         headers: {
-            "User-Agent": "EnableIssues",
+            "User-Agent": "sekhar-webstorm-client",
             "content-type": "application/json",
             "Authorization": token
         }
@@ -72,21 +72,31 @@ function listBranches(owner, repo) {
     });
 }
 
-function createRepo() {
+/**
+ * Module to create a repository. If the repository with the @name exists, then
+ * it is deleted and created again.
+ *
+ * @param name
+ * @param description
+ * @param homepage
+ * @param priv
+ */
+
+function createRepo(name, description, homepage, priv) {
 
     var options = {
         url: urlRoot + "/user/repos",
         method: 'POST',
         headers: {
-            "User-Agent": "EnableIssues",
+            "User-Agent": "sekhar-webstorm-client",
             "content-type": "application/json",
             "Authorization": token
         },
         json: {
-            "name": "SE-Repo-Create",
-            "description": "Created using Github RESP Call",
-            "homepage": "https://github.com",
-            "private": false,
+            "name": name,
+            "description": description,
+            "homepage": homepage,
+            "private": priv,
             "has_issues": true,
             "has_wiki": true,
             "has_downloads": true
@@ -94,14 +104,55 @@ function createRepo() {
     };
 
     // Send a http request to url and specify a callback that will be called upon its return.
-    request(options, function (error, response, obj) {
-        console.log(obj);
-        for (var i = 0; i < obj.length; i++) {
-            var name = obj[i].name;
-            console.log(name);
+    request(options, function (error, response, body) {
+        if (typeof body === "object") {
+
+            var errors = body["errors"];
+            if (errors != null && errors.length > 0) {
+
+                console.log("Error while creating a repository");
+                errors.map(function (error) {
+                    console.log(error["message"])
+                });
+
+                //function closure to send this function to deleteRepo()
+                deleteRepo(userId, name, function () {
+                    createRepo(name, description, homepage, priv)
+                });
+            } else {
+                console.log("Repository created successfully");
+                console.log(body);
+            }
         }
     });
 
 }
 
+/**
+ * Delete a repo (use this to test create Repo)
+ * @param owner
+ * @param name
+ */
+function deleteRepo(owner, name, next) {
+    console.log("Deleting the repository " + name);
+    var options = {
+        url: urlRoot + "/repos/" + owner + "/" + name,
+        method: 'DELETE',
+        headers: {
+            "User-Agent": "sekhar-webstorm-client",
+            "content-type": "application/json",
+            "Authorization": token
+        }
+    };
+
+    // Send a http request to url and specify a callback that will be called upon its return.
+    request(options, function (error, response, body) {
+        if (error == null) {
+            console.log("Repository deleted successfully");
+            if (next != null) {
+                next();
+            }
+        }
+    });
+}
 
