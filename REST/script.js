@@ -4,8 +4,6 @@ var Promise = require('bluebird');
 var parse = require('parse-link-header');
 
 
-////// FILL IN THE BLANKS
-
 var token = "token " + "d61d4af56d9713426a6fdb7092fd09b69c67bd00";
 var userId = "smnatara";
 
@@ -13,10 +11,6 @@ var userId = "smnatara";
 // NCSU Enterprise endpoint:
 var urlRoot = "https://github.ncsu.edu/api/v3";
 
-//getYourRepos(userId);
-//listBranches(userId, "HW1");
-//createRepo("SW_Sample", "Sample repo created for HW1", "www.google.com", true);
-createIssue(userId, "SW_Sample", "Sample Issue", "This is a sample issue");
 
 /**
  * Module to get all repositories for the authenticated user
@@ -189,4 +183,38 @@ function createIssue(owner, repo, title, body) {
         }
     });
 }
+
+function enableWiki(owner, repo) {
+    var options = {
+        url: urlRoot + "/repos/" + owner + "/" + repo,
+        method: 'PATCH',
+        headers: {
+            "User-Agent": "sekhar-webstorm-client",
+            "content-type": "application/json",
+            "Authorization": token
+        },
+        json: {
+            "name":repo,
+            "has_wiki": true
+        }
+    };
+
+    // Send a http request to url and specify a callback that will be called upon its return.
+    request(options, function (error, response, body) {
+        console.log("Repo patched successfully");
+        if (error == null) {
+            if (typeof body === "object") {
+                console.log(body)
+            }
+        }
+    });
+}
+
+// --------------------------------------- test -----------------------------------
+
+//getYourRepos(userId);
+//listBranches(userId, "HW1");
+//createRepo("SW_Sample", "Sample repo created for HW1", "www.google.com", true);
+//createIssue(userId, "SW_Sample", "Sample Issue", "This is a sample issue");
+enableWiki(userId,"SW_Sample");
 
