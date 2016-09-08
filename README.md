@@ -1,9 +1,6 @@
 # HW1
 Software Engineering HW1
 
-# Questions
-----------------
-
 ## REST 
 
 Please refer to [this link](https://github.ncsu.edu/smnatara/HW1/tree/master/REST)
