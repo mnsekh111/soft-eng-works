@@ -184,6 +184,11 @@ function createIssue(owner, repo, title, body) {
     });
 }
 
+/**
+ * Module to enable wiki for a particular repo
+ * @param owner
+ * @param repo
+ */
 function enableWiki(owner, repo) {
     var options = {
         url: urlRoot + "/repos/" + owner + "/" + repo,
