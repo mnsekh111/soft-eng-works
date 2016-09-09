@@ -13,7 +13,7 @@ var urlRoot = "https://github.ncsu.edu/api/v3";
 
 
 /**
- * Module to get all repositories for the authenticated user
+ * Gets all repositories for the authenticated user
  * @param userName
  */
 function getYourRepos(userName) {
@@ -40,7 +40,7 @@ function getYourRepos(userName) {
 }
 
 /**
- * Module to list branches in a given repo under an owner
+ * Lists branches in a given repo under an owner
  * @param owner
  * @param repo
  */
@@ -68,7 +68,7 @@ function listBranches(owner, repo) {
 }
 
 /**
- * Module to create a repository. If the repository with the @name exists, then
+ * Creates a repository. If the repository with the @name exists, then
  * it is deleted and created again.
  *
  * @param name
@@ -124,7 +124,7 @@ function createRepo(name, description, homepage, priv) {
 }
 
 /**
- * Delete a repo (use this to test create Repo)
+ * Deletes a repo (use this to test create Repo)
  * @param owner
  * @param name
  */
@@ -152,7 +152,7 @@ function deleteRepo(owner, name, next) {
 }
 
 /**
- * Module to create an issue to the given repository
+ * Creates an issue to the given repository
  * @param owner
  * @param repo
  * @param title
@@ -185,7 +185,7 @@ function createIssue(owner, repo, title, body) {
 }
 
 /**
- * Module to enable wiki for a particular repo
+ * Enables wiki for a particular repo
  * @param owner
  * @param repo
  */
