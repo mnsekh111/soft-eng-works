@@ -43,7 +43,7 @@
    function enableWiki(owner, repo)
    ```
    
-   Output:
+   Output:<br>
    ![](./output/enablewiki.PNG)
    ![](./output/enablewiki2.PNG)
    
