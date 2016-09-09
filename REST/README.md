@@ -20,7 +20,7 @@
    
        ->function deleteRepo(owner, name, next)
    ```
-   Output:
+   Output:<br>
    ![](./output/createrepo.PNG)
    ![](./output/createrepo2.PNG)
    
