@@ -93,7 +93,7 @@ function createRepo(name, description, homepage, priv) {
             "homepage": homepage,
             "private": priv,
             "has_issues": true,
-            "has_wiki": true,
+            "has_wiki": false,
             "has_downloads": true
         }
     };
@@ -219,7 +219,7 @@ function enableWiki(owner, repo) {
 
 //getYourRepos(userId);
 //listBranches(userId, "HW1");
-//createRepo("SW_Sample", "Sample repo created for HW1", "www.google.com", true);
+createRepo("SW_Sample", "Sample repo created for HW1", "www.google.com", true);
 //createIssue(userId, "SW_Sample", "Sample Issue", "This is a sample issue");
-enableWiki(userId,"SW_Sample");
+//enableWiki(userId,"SW_Sample");
 
