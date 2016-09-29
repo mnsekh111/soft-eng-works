@@ -10,7 +10,6 @@
     * Builder pattern is used to build complex objects with many attributes where certain attributes are optional. 
     * Using builder pattern prevents the need for numberous number of constructors and setter methods for attributes.
 
-    Reference : https://www.javacodegeeks.com/2013/01/the-builder-pattern-in-practice.html
     **Example:**
     ```java
     public class User {
@@ -98,7 +97,6 @@
     * It uses a single class that is resposible to create an object and makes sure that no more objects get created.
     * It also creates the object during the first access and provides a single point of access for this object. Here the `getInstance()` method.
     
-	Reference: https://www.tutorialspoint.com/design_pattern/singleton_pattern.htm
     **Example:**
     ```java
     public class SingleObject {
@@ -125,35 +123,30 @@
 1. #### Adapter Pattern
 	> Adapter pattern is used when there is a need to provide a bridge between two incompatible interfaces without modifying their source code. i.e it comes into place when we want to use an existing class but its interfaces don't match our needs.
 	
-    Reference: https://www.tutorialspoint.com/design_pattern/adapter_pattern.htm
     **Example:**
     ```java
     	public interface NewMediaPlayer {
    			public void play(String fileName);
 		}
-    ```
-	```java
+
     	public interface LegacyMediaPlayer {	
         	public void legacyPlay(String fileName);
 		}
-    ```
-    ```java
+
 		public class MusicPlayer implements LegacyMediaPlayer{
            @Override
 			public void lagacyPlay(String fileName){
             	System.out.println("Playing " + fileName);
             }
         }
-    ```
-    ```java
+
 		public class VideoPlayer implements LegacyMediaPlayer{
            @Override
 			public void lagacyPlay(String fileName){
             	System.out.println("Playing " + fileName);
             }
         }
-    ```
-    ```java
+  
 		public class MediaPlayerAdapter implements NewMediaPlayer{
            	LegacyMediaPlayer lmp;
             public MediaPlayerAdapter(String mediaType){
@@ -168,8 +161,7 @@
             	lmp.legacyPlay(fileName);
             }
         }
-    ```
-    ```java
+
 		public class UniversalPlayer implements NewMediaPlayer{
         	MediaPlayerAdapter mAdapter;
             @Override
@@ -184,7 +176,6 @@
 2. #### Decorator Pattern
 	> Decorator pattern is used to add a new functionality to an existing object without altering its structure. This pattern acts as a wrapper to exisiting class and provides additional features keeping the signatures of the other methods intact.
 	
-    Reference: https://www.tutorialspoint.com/design_pattern/decorator_pattern.htm
 	**Example:**
     ```java
     	public interface Coder{
@@ -194,7 +185,7 @@
         public class NormalProgrammer implements Coder{
         	@Override 
             public void code(){
-            	System.out.println("If you tell me to code, I code");
+            	System.out.println("If you tell me to code, I simple code Mostly without comments");
             }
         }
         
@@ -209,10 +200,71 @@
             	this.coder.code();
             }
         }
+        
+        public class SuperProgrammer extends CoderDecorator{
+        	public SuperProgrammer(Coder c){
+            	super(c);
+            }
+            
+            @Override
+            public void code(){
+            	super.code();
+                System.out.println("I also decorate the code with comments");
+            }
+        }
     ```
+    
 ### Behavioral Patterns
+1. #### Iterator pattern
+	> Iterator pattern is one of the most common behavioral pattern that helps to access the elements of collection without the need to know about the internal representation. i.e without knowing the data structure that stores the data.
+	
+    **Example**
+    ```java
+    	public interface Iterator {
+   			public boolean hasNext();
+   			public Object next();
+		}
+        
+        public interface Container {
+        	public Iterator getIterator();
+        }
+        
+		public class NameRepository implements Container {
+ 			public String names[] = {"Robert" , "John" ,"Julie" , "Lora"};
+
+			@Override
+			public Iterator getIterator() {
+				return new NameIterator();
+			}
+
+			private class NameIterator implements Iterator {
+				int index;
+
+				@Override
+				public boolean hasNext() {
+					if(index < names.length){
+						return true;
+					}
+                    return false;
+                 }
+
+				@Override
+                public Object next() {
+                	if(this.hasNext()){
+                    	return names[index++];
+					}
+					return null;
+				}		
+			}
+		}
+        
+    ```
+2. #### Observer pattern
+	> Observer pattern is used when multiple objects need to be notified when the state of a particular object (which they are observing) changes. This is just like broadcasting a change to the listeners. Thus Observer pattern is suitable whenever there is a one to many relationship between an observable object and observer objects.
 
 
+	Reference : https://www.tutorialspoint.com/design_pattern/
+    Reference : https://www.javacodegeeks.com/2013/01/the-builder-pattern-in-practice.html
 
 
 
