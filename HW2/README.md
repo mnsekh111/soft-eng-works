@@ -1,6 +1,7 @@
-## HW2 Design and Architectural Patterns
+# HW2 Design and Architectural Patterns
+Submitted by **Sekharan Natarajan (smnatara)**
 
-#### Define and describe 2 design patterns from each category.
+## Define and describe 2 design patterns from each category.
 
 ### Creational Patterns
 
@@ -262,9 +263,81 @@
 2. #### Observer pattern
 	> Observer pattern is used when multiple objects need to be notified when the state of a particular object (which they are observing) changes. This is just like broadcasting a change to the listeners. Thus Observer pattern is suitable whenever there is a one to many relationship between an observable object and observer objects.
 
+	**Example**
+    ```java
+    
+    public abstract class Observable{
+    	protected List<Observer> observers;
+        public abstract void notifyAll();
+        public abstract addObserver(Observer obs);
+    }
+    
+    public abstract class Observer{
+    	protected Observable subject;
+        public abstract void update();
+    }
+    
+    public class Seller extends Observable{
+        private List<Items> itemList = new ArrayList<>();
+        
+        public void Seller(){
+        	this.observers = new ArrayList<>();
+        }
+        
+        public void addItem(Item item){
+        	itemList.add(item);
+            notifyAll();
+        }
+        
+    	@Override
+        public void addObserver(Observer obs){
+        	if(!observers.contains(obs)){
+            	observers.add(obs);
+            }
+        }
+        
+        @Override
+        public void notifyAll(){
+        	for(Observer obs : observers){
+            	obs.update();
+            }
+        }
+    }
+    
+    public class Buyer1 extends Observer{
+        public Buyer1(Seller s){
+        	this.subject = s;
+            s.addObserver(this);
+        }
+        
+        @Override
+        public void update(){
+        	System.out.println("Seller has added a new item. Check it out");
+        }
+    }
+    
+    public class Buyer2 extends Observer{
+    	public Buyer2(Seller s){
+        	this.subject = s;
+        	s.addObserver(this)
+        }
+        
+        @Override
+        public void update(){
+        	System.out.println("Hey Observer2 . Seller has added a new item. Check it out");
+        }
+    }
+    ```
+
 
 	Reference : https://www.tutorialspoint.com/design_pattern/
     Reference : https://www.javacodegeeks.com/2013/01/the-builder-pattern-in-practice.html
+    
+    
+
+
+
+
 
 
 
