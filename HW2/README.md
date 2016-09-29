@@ -8,7 +8,7 @@ Submitted by **Sekharan Natarajan (smnatara)**
 1. #### Builder Pattern
     > Builder pattern is generally used for creating complex  objects using simple methods in a step by step approach. The component responsible for building the instances are independent of other components of the application.
 
-	Builder pattern is used to build complex objects with many attributes where certain attributes are optional. Using builder pattern prevents the need for numberous number of constructors and setter methods for attributes. The Builder pattern separates the construction of a complex object from its representation so that the same construction process can create different representations.
+    Builder pattern is used to build complex objects with many attributes where certain attributes are optional. Using builder pattern prevents the need for numerous number of constructors and setter methods for attributes.The Builder pattern separates the construction of a complex object from its representation so that the same construction process can create different representations.
 
     **Example:**
     ```java
@@ -93,8 +93,8 @@ Submitted by **Sekharan Natarajan (smnatara)**
     ```
 2. #### Singleton Pattern
     > This pattern is mainly used when only one instance of a class has to present at any point during the life 	cycle of an application.
-
-	It uses a single class that is resposible to create an object and makes sure that no more objects get created. It also creates the object during the first access and provides a single point of access for this object. Here the `getInstance()` method. The Singleton pattern ensures that a class has only one instance and provides a global point of access to that instance. It is named after the singleton set, which is defined to be a set containing one element. 
+    
+	It uses a single class that is resposible to create an object and makes sure that no more objects get created. It also creates the object during the first access and provides a single point of access for this object. Here the `getInstance()` method which might be the only method that gets exposed to the user.
     
     **Example:**
     ```java
@@ -121,8 +121,6 @@ Submitted by **Sekharan Natarajan (smnatara)**
 ### Structural Patterns
 1. #### Adapter Pattern
 	> Adapter pattern is used when there is a need to provide a bridge between two incompatible interfaces without modifying their source code. i.e it comes into place when we want to use an existing class but its interfaces don't match our needs.
-
-	Adapter is about creating an intermediary abstraction that translates, or maps, the old component to the new system. Clients call methods on the Adapter object which redirects them into calls to the legacy component. This strategy can be implemented either with inheritance or with aggregation.
 	
     **Example:**
     ```java
@@ -177,8 +175,6 @@ Submitted by **Sekharan Natarajan (smnatara)**
 2. #### Decorator Pattern
 	> Decorator pattern is used to add a new functionality to an existing object without altering its structure. This pattern acts as a wrapper to exisiting class and provides additional features keeping the signatures of the other methods intact.
 	
-	This pattern allows responsibilities to be added to an object, not methods to an object's interface. The interface presented to the client must remain constant as successive layers are specified. Also the core object's identity has now been "hidden" inside of a decorator object. Trying to access the core object directly is now a problem.
-
 	**Example:**
     ```java
     	public interface Coder{
@@ -220,8 +216,6 @@ Submitted by **Sekharan Natarajan (smnatara)**
 ### Behavioral Patterns
 1. #### Iterator pattern
 	> Iterator pattern is one of the most common behavioral pattern that helps to access the elements of collection without the need to know about the internal representation. i.e without knowing the data structure that stores the data.
-
-	The key idea is to take the responsibility for access and traversal out of the aggregate object and put it into an Iterator object that defines a standard traversal protocol.The Iterator abstraction is fundamental to an emerging technology called "generic programming". This strategy seeks to explicitly separate the notion of "algorithm" from that of "data structure". The motivation is to: promote component-based development, boost productivity, and reduce configuration management.
 	
     **Example**
     ```java
@@ -267,8 +261,6 @@ Submitted by **Sekharan Natarajan (smnatara)**
 2. #### Observer pattern
 	> Observer pattern is used when multiple objects need to be notified when the state of a particular object (which they are observing) changes. This is just like broadcasting a change to the listeners. Thus Observer pattern is suitable whenever there is a one to many relationship between an observable object and observer objects.
 
-	This pattern allows to delegate all "view" functionality to decoupled and distinct Observer objects. The Observer pattern captures the lion's share of the Model-View-Controller architecture.
-    
 	**Example**
     ```java
     
