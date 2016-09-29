@@ -1,6 +1,3 @@
-# HW2 Design and Architectural Patterns
-Submitted by **Sekharan Natarajan (smnatara)**
-
 ## Define and describe 2 design patterns from each category.
 
 ### Creational Patterns
