@@ -9,13 +9,13 @@ Master-Slave applies the 'divide and conquer' principle. Work is partitioned  in
 
 **Example :** The traveling-salesman problem is well-known in graph theory. The task is to find an optimal round trip between a given set of  locations, such as the shortest trip that visits each location exactly once. The solution to this problem is of high computational complexity and is NP complete.
 
-_ To solve the master slave problem, the following considerations need to be taken: _ 
+To solve the master slave problem, the following considerations need to be taken:
 
-	1. Divide work. Specify how the computation of  the task can be split into a set of  equal sub-tasks. Identify the sub-services that are necessary to process a sub-task. 
+1. **Divide work :** Specify how the computation of  the task can be split into a set of  equal sub-tasks. Identify the sub-services that are necessary to process a sub-task. 
 	
-	2. Combine sub-task results. Specify how the final result of the whole service can be computed with the help of the results obtained from processing individual sub-tasks. 
+2. **Combine sub-task results :** Specify how the final result of the whole service can be computed with the help of the results obtained from processing individual sub-tasks. 
 
-	3. Specify the  cooperation between master and slaves. Define an interface for the sub-service identified in step 1. It will be implemented by the slave and used by the master to delegate the processing of indi- vidual sub-tasks
+3. **Specify the  cooperation between master and slaves :** Define an interface for the sub-service identified in step 1. It will be implemented by the slave and used by the master to delegate the processing of indi- vidual sub-tasks
 
 ![Image](master_slave.png)
 ------
