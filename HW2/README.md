@@ -2,8 +2,7 @@
 
 Submitted by **Sekharan Natarajan (smnatara)**
 
-OO Patterns - [here](./oo-patterns)
-Free Style  - [here](./free-style)
-Questions   - [here](./arch-design)
-	GraphQl vs REST
-	Pokemon Go
+* OO Patterns - [here](./oo-patterns) <br> 
+* Free Style  - [here](./free-style) <br>
+* GraphQl vs REST & Pokemon Go  :alien: - [here](./arch-design) <br>
+	
