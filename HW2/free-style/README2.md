@@ -43,3 +43,25 @@ Queues have a message "Delayed Send" function. You can use this to delay the tim
 ![Image](./pq_pattern.png)
 
 ###### Reference : http://en.clouddesignpattern.org/index.php/CDP:Priority_Queue_Pattern
+
+--------
+
+**3.Cache-Aside Pattern**
+
+Applications use a cache to optimize repeated access to information held in a data store. However, it is usually impractical to expect that cached data will always be completely consistent with the data in the data store. Applications should implement a strategy that helps to ensure that the data in the cache is up to date as far as possible, but can also detect and handle situations that arise when the data in the cache has become stale.
+
+Many commercial caching systems provide read-through and write-through/write-behind operations. In these systems, an application retrieves data by referencing the cache. If the data is not in the cache, it is transparently retrieved from the data store and added to the cache. Any modifications to data held in the cache are automatically written back to the data store as well.
+
+For caches that do not provide this functionality, it is the responsibility of the applications that use the cache to maintain the data in the cache.
+An application can emulate the functionality of read-through caching by implementing the cache-aside strategy. This strategy effectively loads data into the cache on demand. Figure 1 summarizes the steps in this process.
+
+**Considerations:**
+* Lifetime of Cached Data 
+* Evicting Data
+* Priming the Cache
+* Consistency
+* Local (In-Memory) Caching.
+
+![Image](./cache_aside.png)
+###### Reference : https://msdn.microsoft.com/en-us/library/dn589799.aspx
+-----------
