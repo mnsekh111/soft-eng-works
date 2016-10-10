@@ -25,8 +25,8 @@
       <file leaf-file-name="WebTest.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/test/java/selenium/tests/WebTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="507">
-              <caret line="76" column="0" selection-start-line="76" selection-start-column="0" selection-end-line="76" selection-end-column="0" />
+            <state relative-caret-position="423">
+              <caret line="80" column="20" selection-start-line="80" selection-start-column="20" selection-end-line="80" selection-end-column="20" />
               <folding />
             </state>
           </provider>
@@ -202,7 +202,7 @@
     <property name="settings.editor.splitter.proportion" value="0.2" />
     <property name="js-jscs-nodeInterpreter" value="/usr/bin/node" />
   </component>
-  <component name="RunManager" selected="JUnit.WebTest.participantCount">
+  <component name="RunManager" selected="JUnit.WebTest.openClickable">
     <configuration default="false" name="WebTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
         <pattern>
@@ -268,6 +268,32 @@
       <option name="PACKAGE_NAME" value="selenium.tests" />
       <option name="MAIN_CLASS_NAME" value="selenium.tests.WebTest" />
       <option name="METHOD_NAME" value="Closed" />
+      <option name="TEST_OBJECT" value="method" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <envs />
+      <patterns />
+      <method />
+    </configuration>
+    <configuration default="false" name="WebTest.openClickable" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
+        <pattern>
+          <option name="PATTERN" value="selenium.tests.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <module name="Selenium" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" value="selenium.tests" />
+      <option name="MAIN_CLASS_NAME" value="selenium.tests.WebTest" />
+      <option name="METHOD_NAME" value="openClickable" />
       <option name="TEST_OBJECT" value="method" />
       <option name="VM_PARAMETERS" value="-ea" />
       <option name="PARAMETERS" />
@@ -688,16 +714,18 @@
     <configuration default="true" type="osgi.bnd.run" factoryName="Test Launcher (JUnit)">
       <method />
     </configuration>
-    <list size="3">
+    <list size="4">
       <item index="0" class="java.lang.String" itemvalue="JUnit.WebTest" />
       <item index="1" class="java.lang.String" itemvalue="JUnit.WebTest.participantCount" />
       <item index="2" class="java.lang.String" itemvalue="JUnit.WebTest.Closed" />
+      <item index="3" class="java.lang.String" itemvalue="JUnit.WebTest.openClickable" />
     </list>
     <recent_temporary>
-      <list size="3">
-        <item index="0" class="java.lang.String" itemvalue="JUnit.WebTest.participantCount" />
-        <item index="1" class="java.lang.String" itemvalue="JUnit.WebTest.Closed" />
-        <item index="2" class="java.lang.String" itemvalue="JUnit.WebTest" />
+      <list size="4">
+        <item index="0" class="java.lang.String" itemvalue="JUnit.WebTest.openClickable" />
+        <item index="1" class="java.lang.String" itemvalue="JUnit.WebTest.participantCount" />
+        <item index="2" class="java.lang.String" itemvalue="JUnit.WebTest.Closed" />
+        <item index="3" class="java.lang.String" itemvalue="JUnit.WebTest" />
       </list>
     </recent_temporary>
   </component>
@@ -715,7 +743,7 @@
       <option name="presentableId" value="Default" />
       <updated>1476061406539</updated>
       <workItem from="1476061410842" duration="123000" />
-      <workItem from="1476061553826" duration="5093000" />
+      <workItem from="1476061553826" duration="5493000" />
     </task>
     <servers />
   </component>
@@ -723,8 +751,8 @@
     <history-entry file="WebTest_Closed - 2016.10.09 at 22h 33m 03s.xml">
       <configuration name="WebTest.Closed" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="WebTest_participantCount - 2016.10.09 at 22h 29m 02s.xml">
-      <configuration name="WebTest.participantCount" configurationId="JUnit" />
+    <history-entry file="WebTest_openClickable - 2016.10.09 at 22h 49m 30s.xml">
+      <configuration name="WebTest.openClickable" configurationId="JUnit" />
     </history-entry>
     <history-entry file="WebTest_participantCount - 2016.10.09 at 22h 32m 21s.xml">
       <configuration name="WebTest.participantCount" configurationId="JUnit" />
@@ -752,7 +780,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="5216000" />
+    <option name="totallyTimeSpent" value="5616000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="-1" width="1920" height="1055" extended-state="6" />
@@ -828,8 +856,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/selenium/tests/WebTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="507">
-          <caret line="76" column="0" selection-start-line="76" selection-start-column="0" selection-end-line="76" selection-end-column="0" />
+        <state relative-caret-position="423">
+          <caret line="80" column="20" selection-start-line="80" selection-start-column="20" selection-end-line="80" selection-end-column="20" />
           <folding />
         </state>
       </provider>
