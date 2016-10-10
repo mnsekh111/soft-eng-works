@@ -12,7 +12,6 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.List;
-import java.util.Scanner;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -58,7 +57,7 @@ public class WebTest {
     public void participantCount() throws Exception {
         driver.get("http://www.checkbox.io/studies.html");
         WebDriverWait wait = new WebDriverWait(driver, 30);
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()[contains(.,'Frustration of Software Developers')]]/ancestor::div[contains(@class,'row')]/div[@class='span4']/p/span")));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[@class='status']/span[.='CLOSED']")));
         List<WebElement> values = driver.findElements(By.xpath("//*[text()[contains(.,'Frustration of Software Developers')]]/ancestor::div[contains(@class,'row')]/div[@class='span4']/p/span"));
 
         //System.out.println(values.get(0).getText());
@@ -80,11 +79,24 @@ public class WebTest {
         WebDriverWait wait = new WebDriverWait(driver, 30);
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[@class='status']/span[.='OPEN']")));
         List<WebElement> spans = driver.findElements(By.xpath("//a[@class='status']/span[.='OPEN']"));
-        List<WebElement> buttons = driver.findElements(By.xpath("//a[@class='status']/span[.='OPEN']/ancestor::div[@class='span4']//button"));
+        List<WebElement> buttons = driver.findElements(By.xpath("//a[@class='status']/span[.='OPEN']/ancestor::div[@class='span4']//button[text()='Participate']"));
 
-        assertNotNull(spans);
         assertNotNull(buttons);
+        assertNotNull(spans);
         assertEquals(buttons.size(), spans.size());
+    }
+
+    @Test
+    public void checkAmazon() throws Exception {
+        driver.get("http://www.checkbox.io/studies.html");
+
+        // http://geekswithblogs.net/Aligned/archive/2014/10/16/selenium-and-timing-issues.aspx
+        WebDriverWait wait = new WebDriverWait(driver, 30);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[@class='status']/span[.='CLOSED']")));
+        List<WebElement> amazonOffers = driver.findElements(By.xpath("//*[text()[contains(.,'Software Changes Survey')]]/ancestor::div[contains(@class,'row')]//img[@src='/media/amazongc-micro.jpg']"));
+
+        assertNotNull(amazonOffers);
+        assertEquals(amazonOffers.size(), 1);
     }
 
 }
