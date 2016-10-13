@@ -92,6 +92,5 @@ Your timeline should have:
 * At least one tweet with a picture, and at least one tweet without a picture.
 * Basic stats about tweet (retweet, favorites) on bottom.
 
-* README.md
 * A gh-branch (Github Pages) for viewing your javascript/css/html.
 * Code for Selenium
