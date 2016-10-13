@@ -2,33 +2,49 @@
   "tweets": [
     {
       "author": "Virat Kohli",
-      "id": "imVohli",
+      "id": "@imVohli",
       "message": "This is a sample message from vkohli.This is a sample message from vkohli.This is a sample message from vkohli",
       "img": null,
+      "pp":"images/kohli.jpg",
       "retweets":200,
-      "replies":130
+      "replies":130,
+      "favorites":20
     },
     {
       "author": "Paul Pogba",
-      "id": "imPogba",
+      "id": "@imPogba",
       "message": "This is a sample message from Pogba.This is a sample message from Pogba.This is a sample message from Pogba",
       "img": null,
+      "pp":"images/pogba.jpg",
       "retweets":111,
-      "replies":122
+      "replies":122,
+      "favorites":10
     },
     {
       "author": "Virat Kohli",
-      "id": "imVohli",
+      "id": "@imVohli",
       "message": "This is a sample message from vkohli with an image.This is a sample message from vkohli with an image .This is a sample message from vkohli with an image",
       "img": "images/vkohli.jpg",
+      "pp":"images/kohli.jpg",
       "retweets":100,
-      "replies":150
+      "replies":150,
+      "favorites":0
+    },
+    {
+      "author": "Paul Pogba",
+      "id": "@imPogba",
+      "message": "This is a second sample message from Pogba.This is a second sample message from Pogba.This is a second sample message from Pogba",
+      "img": null,
+      "pp":"images/pogba.jpg",
+      "retweets":0,
+      "replies":0,
+      "favorites":0
     }
   ],
   "profile": {
     "name": "Sekharan Natarajan",
     "pp":"images/mnsekh111.png",
-    "id": "mnsekh111",
+    "id": "@mnsekh111",
     "tweets": 1000,
     "followers": "2m",
     "following": 10

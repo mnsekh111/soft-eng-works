@@ -59,10 +59,11 @@
 
         <div class="collapse navbar-collapse" id="defaultNavbar1">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="#">Home<span class="sr-only">(current)</span></a></li>
+                <li><a href="#">Home<span class="sr-only">(current)</span></a></li>
                 <li><a href="#">Moments</a></li>
                 <li><a href="#">Notifications</a></li>
                 <li><a href="#">Messages</a></li>
+                <li class="active"><a href="#" data-bind="text:profile.name"></a></li>
             </ul>
 
             <ul class="nav navbar-nav navbar-right">
@@ -84,7 +85,7 @@
             <div class="well">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <h3 class="panel-title" data-bind="text:profile.name"><strong>Sekharan Natarajan</strong><br>
+                        <h3 class="panel-title" style="font-weight: bolder" data-bind="text:profile.name">myname</strong><br>
                         </h3>
                         <span data-bind="text:profile.id">@mnsekh111</span>
                     </div>
@@ -116,13 +117,14 @@
                 </div>
                 <div class="media-object-default" data-bind="foreach:tweets">
                     <div class="well">
-                        <div class="media-left"><a href="#"><img class="media-object"
+                        <div class="media-left"><a href="#"><img data-bind="attr:{src:pp}" class="media-object"
                                                                  src="images/MediaObj_Placeholder.png"
                                                                  width="100px"
                                                                  height="100px"
                                                                  alt="placeholder image"></a></div>
                         <div class="media-body">
                             <h4 class="media-heading" data-bind="text:author">Media heading 2</h4>
+                            <h5 class="media-heading" style="color: #1f7e9a" data-bind="text:id">Media heading 2</h5>
                             <div data-bind="text:message">
                                 This is the content inside the media-body. By default the media is top-aligned. Use
                                 class
@@ -136,14 +138,19 @@
                              alt="Placeholder image">
                         <div class="row tweet-control">
                             <button type="button" class="btn btn-primary"><span
-                                    class="glyphicon glyphicon-share-alt"></span>10
+                                    class="glyphicon glyphicon-share-alt"><span style="padding:5px"
+                                                                                data-bind="text:replies"></span></span>
                             </button>
                             <button type="button" class="btn btn-primary"><span
-                                    class="glyphicon glyphicon-retweet"></span></button>
+                                    class="glyphicon glyphicon-retweet"><span style="padding:5px"
+                                                                              data-bind="text:retweets"></span></span>
+                            </button>
                             <button type="button" class="btn btn-primary"><span
-                                    class="glyphicon glyphicon-star-empty"></span></button>
+                                    class="glyphicon glyphicon-star-empty"><span style="padding:5px"
+                                                                                 data-bind="text:favorites"></span></span>
+                            </button>
                             <button type="button" class="btn btn-primary"><span
-                                    class="glyphicon glyphicon-heart-empty"></span></button>
+                                    class="glyphicon glyphicon-heart"></span></button>
                         </div>
                     </div>
                 </div>
@@ -151,31 +158,32 @@
             <div class="col-md-3 hideOverflow">
                 <div class="well primary-header-bg"><b> Whom to follow ? </b></div>
                 <div class="well">
-                    <div class="row">
+                    <div class="row" align="center">
                         <div class="col-md-5"><img src="images/charizard.png" class="img-thumbnail img-responsive"
                                                    alt="Placeholder image"></div>
                         <div class="col-md-7" style="word-wrap:break-word"><strong>Charizard</strong><br>
-                            @charizard
+                            @charizard<br>
                             <button type="button" class="btn btn-primary">Follow</button>
                         </div>
                     </div>
                 </div>
                 <div class="well">
-                    <div class="row">
+                    <div class="row" align="center">
                         <div class="col-md-5"><img src="images/manutd.png" class="img-thumbnail img-responsive"
                                                    alt="Placeholder image"></div>
-                        <div class="col-md-7" style="word-wrap:break-word"><strong>Manchester United</strong><br>
-                            @manutd
+                        <div class="col-md-7 col-sm-7" style="word-wrap:break-word"><strong>Manchester
+                            United</strong><br>
+                            @manutd<br>
                             <button type="button" class="btn btn-primary">Follow</button>
                         </div>
                     </div>
                 </div>
                 <div class="well">
-                    <div class="row">
+                    <div class="row" align="center">
                         <div class="col-md-5"><img src="images/mario.png" class="img-thumbnail img-responsive"
                                                    alt="Placeholder image"></div>
                         <div class="col-md-7" style="word-wrap:break-word"><strong>Mario</strong><br>
-                            @mario
+                            @mario<br>
                             <button type="button" class="btn btn-primary">Follow</button>
                         </div>
                     </div>
