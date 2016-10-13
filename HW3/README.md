@@ -12,7 +12,7 @@
 
 
 How to run?
-1. Open the selenium folder in IntellijIdea
+1. Open the selenium folder in Intellij Idea
 2. Find the WebTest.java inside the src folder, right click and "Run as JUnit test"
 
 
