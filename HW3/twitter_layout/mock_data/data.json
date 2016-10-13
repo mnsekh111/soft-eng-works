@@ -4,19 +4,25 @@
       "author": "Virat Kohli",
       "id": "imVohli",
       "message": "This is a sample message from vkohli.This is a sample message from vkohli.This is a sample message from vkohli",
-      "img": null
+      "img": null,
+      "retweets":200,
+      "replies":130
     },
     {
       "author": "Paul Pogba",
       "id": "imPogba",
       "message": "This is a sample message from Pogba.This is a sample message from Pogba.This is a sample message from Pogba",
-      "img": null
+      "img": null,
+      "retweets":111,
+      "replies":122
     },
     {
       "author": "Virat Kohli",
       "id": "imVohli",
-      "message": "This is a sample message from vkohli with a image.This is a sample message from vkohli with a image .This is a sample message from vkohli with a image",
-      "img": "images/vkohli.jpg"
+      "message": "This is a sample message from vkohli with an image.This is a sample message from vkohli with an image .This is a sample message from vkohli with an image",
+      "img": "images/vkohli.jpg",
+      "retweets":100,
+      "replies":150
     }
   ],
   "profile": {

@@ -56,6 +56,7 @@
                     class="icon-bar"></span><span class="icon-bar"></span></button>
             <a class="navbar-brand" href="#">Twitter</a></div>
         <!-- Collect the nav links, forms, and other content for toggling -->
+
         <div class="collapse navbar-collapse" id="defaultNavbar1">
             <ul class="nav navbar-nav">
                 <li class="active"><a href="#">Home<span class="sr-only">(current)</span></a></li>
@@ -63,6 +64,7 @@
                 <li><a href="#">Notifications</a></li>
                 <li><a href="#">Messages</a></li>
             </ul>
+
             <ul class="nav navbar-nav navbar-right">
                 <div class="form-group">
                     <input type="text" class="form-control" placeholder="Search">
@@ -75,19 +77,25 @@
 </nav>
 <div class="container">
     <div class="row">
-        <div class="col-md-3"><img src="images/ImgResponsive_Placeholder.png" class="img-circle img-responsive"
-                                   alt="Placeholder image">
+        <div class="col-md-3" align="center"><img data-bind="attr:{src:profile.pp}" width="200px" height="200px"
+                                                  src="images/ImgResponsive_Placeholder.png"
+                                                  class="img-circle img-responsive"
+                                                  alt="Placeholder image"><br>
             <div class="well">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <h3 class="panel-title"><strong>Sekharan Natarajan</strong><br>
-                            @mnsekh111</h3>
+                        <h3 class="panel-title" data-bind="text:profile.name"><strong>Sekharan Natarajan</strong><br>
+                        </h3>
+                        <span data-bind="text:profile.id">@mnsekh111</span>
                     </div>
                     <div class="panel-body">
                         <ul class="list-group">
-                            <li class="list-group-item">Tweets<span class="badge">200</span></li>
-                            <li class="list-group-item">Following<span class="badge">10</span></li>
-                            <li class="list-group-item">Followers<span class="badge">2.2m</span></li>
+                            <li class="list-group-item">Tweets<span class="badge"><div
+                                    data-bind="text:profile.tweets"></div></span></li>
+                            <li class="list-group-item">Following<span class="badge"><div
+                                    data-bind="text:profile.following"></div></span></li>
+                            <li class="list-group-item">Followers<span class="badge"><div
+                                    data-bind="text:profile.followers"></div></span></li>
                         </ul>
                     </div>
                 </div>
@@ -110,6 +118,8 @@
                     <div class="well">
                         <div class="media-left"><a href="#"><img class="media-object"
                                                                  src="images/MediaObj_Placeholder.png"
+                                                                 width="100px"
+                                                                 height="100px"
                                                                  alt="placeholder image"></a></div>
                         <div class="media-body">
                             <h4 class="media-heading" data-bind="text:author">Media heading 2</h4>
