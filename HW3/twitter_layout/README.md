@@ -8,7 +8,11 @@ Bootstrap is responsive by default.
 
 #### Layout on a Mobile device
 
-![pc](screen_shots/mobile1.png)  ![pc](screen_shots/mobile2.PNG)
+pic 1             |  pic 2
+:-------------------------:|:-------------------------:
+![pc](screen_shots/mobile1.png)  |  ![pc](screen_shots/mobile2.PNG)
+
+    
 
 
 #### Mock data file : [mock.json](mock_data/mock.json)
