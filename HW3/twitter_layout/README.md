@@ -20,7 +20,7 @@ pic 1             |  pic 2
 
 #### Knockout code:
 
-```
+```html
 <div class="media-object-default" data-bind="foreach:tweets">
                        <div class="well">
                            <div class="media-left"><a href="#"><img data-bind="attr:{src:pp}" class="media-object"
