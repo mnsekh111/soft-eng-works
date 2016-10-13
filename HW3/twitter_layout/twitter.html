@@ -16,13 +16,32 @@
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 
-<style></style>
+<style>
+.primary-bg {
+	background-color: #DFDFDF;
+}
+.primary-header-bg {
+	background-color: #7580FF
+}
+.tweet-box {
+	margin-left: 2px;
+	margin-right: 2px
+}
+.tweet-control {
+	padding-left: 20px;
+	padding-top: 20px
+}
+.my-foot {
+	color: white;
+	background: #373737
+}
+</style>
 </head>
-<body style="background-color:#DFDFDF">
-<nav class="navbar navbar-default">
+<body class="primary-bg">
+<nav class="navbar navbar-default primary-header-bg">
   <div class="container-fluid"> 
     <!-- Brand and toggle get grouped for better mobile display -->
-    <div class="navbar-header">
+    <div class="navbar-header" >
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#defaultNavbar1"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
       <a class="navbar-brand" href="#">Twitter</a></div>
     <!-- Collect the nav links, forms, and other content for toggling -->
@@ -52,18 +71,23 @@
             <h3 class="panel-title"><strong>Sekharan Natarajan</strong><br>
               @mnsekh111</h3>
           </div>
-          <div class="panel-body"> Panel content </div>
-          <div class="panel-footer">Panel footer</div>
+          <div class="panel-body">
+            <ul class="list-group">
+              <li class="list-group-item">Tweets<span class="badge">200</span></li>
+              <li class="list-group-item">Following<span class="badge">10</span></li>
+              <li class="list-group-item">Followers<span class="badge">2.2m</span></li>
+            </ul>
+          </div>
         </div>
       </div>
-      <div class="well">This is the content inside a normal well. Use class 'well-lg' or 'well-sm' for large and small well, respectively.</div>
+      <div class="well">Ads - blocked by your browser</div>
     </div>
     <div>
       <div class="col-md-6">
         <div class="well">
           <div class="row">
             <div class="col-md-8">
-              <input type="text" class="form-control" style="margin-left:2px;margin-right:2px">
+              <input type="text" class="form-control tweet-box">
             </div>
             <div class="col-md-4">
               <button type="button" class="btn btn-primary">Tweet!</button>
@@ -76,7 +100,7 @@
             <div class="media-body">
               <h4 class="media-heading">Media heading 1</h4>
               This is the content inside the media-body. By default the media is top-aligned. Use class 'media-middle' or 'media-bottom' to middle align or bottom align them, respectively. </div>
-            <div class="row" style="padding-left:20px;padding-top:20px">
+            <div class="row tweet-control">
               <button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-share-alt"></span></button>
               <button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-retweet"></span></button>
               <button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-star-empty"></span></button>
@@ -88,7 +112,7 @@
             <div class="media-body">
               <h4 class="media-heading">Media heading 2</h4>
               This is the content inside the media-body. By default the media is top-aligned. Use class 'media-middle' or 'media-bottom' to middle align or bottom align them, respectively. </div>
-            <div class="row" style="padding-left:20px;padding-top:20px">
+            <div class="row tweet-control" >
               <button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-share-alt"></span></button>
               <button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-retweet"></span></button>
               <button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-star-empty"></span></button>
@@ -101,8 +125,9 @@
               <h4 class="media-heading">Media heading 2</h4>
               This is the content inside the media-body. By default the media is top-aligned. Use class 'media-middle' or 'media-bottom' to middle align or bottom align them, respectively. <br>
               <br>
-              <img width = "100%" src="images/ImgResponsive_Placeholder.png" class="img-responsive" alt="Placeholder image"> </div>
-            <div class="row" style="padding-left:20px;padding-top:20px">
+            </div>
+            <img width = "100%" src="images/ImgResponsive_Placeholder.png" class="img-responsive" alt="Placeholder image">
+            <div class="row tweet-control">
               <button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-share-alt"></span></button>
               <button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-retweet"></span></button>
               <button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-star-empty"></span></button>
@@ -114,7 +139,7 @@
             <div class="media-body">
               <h4 class="media-heading">Media heading 2</h4>
               This is the content inside the media-body. By default the media is top-aligned. Use class 'media-middle' or 'media-bottom' to middle align or bottom align them, respectively. </div>
-            <div class="row" style="padding-left:20px;padding-top:20px">
+            <div class="row tweet-control">
               <button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-share-alt"></span></button>
               <button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-retweet"></span></button>
               <button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-star-empty"></span></button>
@@ -124,12 +149,39 @@
         </div>
       </div>
       <div class="col-md-3 hideOverflow">
-        <div class="well"></div>
+        <div class="well primary-header-bg" > <b> Whom to follow ? </b> </div>
+        <div class="well">
+          <div class="row">
+            <div class="col-md-5"> <img src="images/charizard.png" class="img-thumbnail img-responsive" alt="Placeholder image"></div>
+            <div class="col-md-7" style="word-wrap:break-word"><strong>Charizard</strong><br>
+              @charizard
+              <button type="button" class="btn btn-primary">Follow</button>
+            </div>
+          </div>
+        </div>
+        <div class="well">
+          <div class="row">
+            <div class="col-md-5"> <img src="images/manutd.png" class="img-thumbnail img-responsive" alt="Placeholder image"></div>
+            <div class="col-md-7" style="word-wrap:break-word"><strong>Manchester United</strong><br>
+              @manutd
+              <button type="button" class="btn btn-primary">Follow</button>
+            </div>
+          </div>
+        </div>
+        <div class="well">
+          <div class="row">
+            <div class="col-md-5"> <img src="images/mario.png" class="img-thumbnail img-responsive" alt="Placeholder image"></div>
+            <div class="col-md-7" style="word-wrap:break-word"><strong>Mario</strong><br>
+              @mario
+              <button type="button" class="btn btn-primary">Follow</button>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </div>
-<div class="container" style="color:white;background:#373737">
+<div class="container my-foot">
   <hr>
   <div class="row">
     <div class="text-center col-md-12">
