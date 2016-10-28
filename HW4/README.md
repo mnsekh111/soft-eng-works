@@ -1,66 +1,129 @@
-# Complexity
-
-In this workshop, you'll be implementing simple algorithms for checking basic properties of code complexity.
-
-Two design patterns are of importance here:
-* A [Builder pattern](https://en.wikipedia.org/wiki/Builder_pattern), which is used to build up state and then finally emit.
-* A [Visitor pattern](https://en.wikipedia.org/wiki/Visitor_pattern), which is used to abstract the process of visiting a data structure such as abstract syntax tree (AST). The only input you have to provide is what action to perform at each node.
-
-### Esprima
-
-Instead of building a scanner and parser by hand like we [demonstrated previously](https://github.com/CSC-DevOps/Parsing). We will use an existing library, [esprima](http://esprima.org/), to parse code and create a static analyzer for basic code complexity metrics.
-
-##### Video
-If you have not already watched this video, you can get more background about Esprima here:
-Watch [5:00-14:30,28:00-34:00](https://www.youtube.com/watch?v=ACYZFkvq0Sk).
-
-##### Interactive AST
-
-Use the [demo page](http://esprima.org/demo/parse.html) to see what a code snippet looks like, in order to help you navigate the data structure.
-
-For example, the following snippet:
-
-```
-function functionName( node )
-{
-	if( node.id )
-	{
-		return node.id.name;
-	}
-	return "anon function @" + node.loc.start.line;
-}
-```
-
-Will appear as following, and:
-
-![image](https://cloud.githubusercontent.com/assets/742934/9937779/295bc654-5d30-11e5-9e60-6454fb5360f3.png)
+# HW4 
+## Submitted by Sekharan Natarajan (smnatara)
+Please refer to [analysis.js](analysis.js)
 
 
-**Can be [interacted with here](http://esprima.org/demo/parse.html?code=function%20functionName(%20node%20)%0A%7B%0A%09if(%20node.id%20)%0A%09%7B%0A%09%09return%20node.id.name%3B%0A%09%7D%0A%09return%20%22anon%20function%20%40%22%20%2B%20node.loc.start.line%3B%0A%7D)**.
+Please use `node --harmony_array_includes analysis.js` to run. 
 
-### Workshop
+##### 1. Do a simple calculations (50 points)
 
-The repository contains a stub that parses a javascript file and visits each function. 
+   * **String Usage**: How many string literals are used in file.
 
-1. Run the program and print all the tokens in an ast.
-   ```
-      npm install
-      node analysis.js
+   ```javascript
+        if (node.type === 'Literal' && typeof(node.value) === 'string') {
+            fileBuilder.Strings += 1;
+        }
    ```
 
-2. Do a simple calculation
+   * **ParameterCount**: The number of parameters for function. 
+   
+   ```javascript
+		if (node.type === 'FunctionDeclaration') {
+            var builder = new FunctionBuilder();
 
-   * **String Usage**: How many string literals are used in file? (FileBuilder)
-   * **ParameterCount**: The number of parameters for functions (FunctionBuilder)
+            builder.FunctionName = functionName(node);
+            builder.StartLine = node.loc.start.line;
+            builder.ParameterCount = node.params.length;
+            builder.MaxMessageChains = 0;
+       }
+   ```
+   
+   * **PackageComplexity**: The number of imports used in file. 
+  
+   ```javascript
+		if (node.type === 'Identifier' && node.name === 'require') {
+            fileBuilder.PackageComplexity += 1;
+        }
+   ```
+   
+   * **Returns**: The number of return statements in function.
+   
+   ```javascript
+	        if (node.type === 'FunctionDeclaration') {
+            	var builder = new FunctionBuilder();
 
-3. Using multiple visitors.
+            	builder.FunctionName = functionName(node);
+            	builder.StartLine = node.loc.start.line;
+            	builder.ParameterCount = node.params.length;
+            	builder.MaxMessageChains = 0;
+
+            	builders[builder.FunctionName] = builder;
+
+            	traverseWithParents(node, function (child) {
+
+                	if (isDecision(child)) {
+                    	builder.SimpleCyclomaticComplexity += 1;
+                	}
+                	if (child.type === 'ReturnStatement') {
+                    	builder.ReturnCount += 1;
+                	}
+            	}
+            }
+   ```
+   
+   * **AllConditions**: The total number of conditions in file.
+   
+   ```javascript
+		if (isDecision(node) || node.operator === '&&' || node.operator === '||') {
+            fileBuilder.FileConditions += 1;
+        }    
+   ```
+
+##### 2. Using multiple visitors (50 points).
 
    * **SimpleCyclomaticComplexity**: The number of if statements/loops + 1.
+	```javascript
+	if(isDecision(child)){
+ 		builder.SimpleCyclomaticComplexity += 1;
+	}
 
-4. Advanced (using parents/etc):
-
-   * **MaxConditions**: The max number of conditions in one statement.
-   * **MaxNestingDepth**: The max depth of scopes (nested ifs, loops, etc) -- this one is hard, only expect a few to get to do finish this one.
+	```
 
 
 
+   * **MaxMessageChains**: The max length of a message chain in a function. A message chain can be formed from a method call (), a data access (.), or array access [0].
+   
+  ```javascript
+          if (child.type === 'MemberExpression') {
+              var currentCount = getNestedCount(child, 0, ['MemberExpression']);
+			  if (currentCount > builder.MaxMessageChains)
+                        builder.MaxMessageChains = currentCount;
+          }
+  ``` 
+
+#####3. Bonus (20 points):
+
+   * **MaxConditions**: The max number of conditions inside one if statement per function.
+   
+   ```javascript
+         if (child.type === 'IfStatement') {
+              var currentCount = getNestedCount(child.test, 1, ['LogicalExpression']);
+                if (currentCount > builder.MaxConditions)
+                   builder.MaxConditions = currentCount;
+         }
+   ```
+   
+   * **MaxNestingDepth**: The max depth of scopes (nested ifs, loops, etc) per function.
+   
+   ```javascript
+   	function getMaxDepth(object, count, type, key) {
+    	var key, child;
+    	if (type.includes(object.type) && 'alternate' != key) {
+        	count += 1;
+    	}
+
+    	for (key in object) {
+        	if (object.hasOwnProperty(key)) {
+            	child = object[key];
+            	if (typeof child === 'object' && child !== null && key != 'parent') {
+                	child.parent = object;
+                	var newcount = getMaxDepth(child, count, type, key);
+                	if (newcount > count) {
+                    	count = newcount;
+                	}
+            	}
+        	}
+    	}
+    	return count;
+     }
+   ```

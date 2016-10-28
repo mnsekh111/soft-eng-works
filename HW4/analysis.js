@@ -1,13 +1,13 @@
 var esprima = require("esprima");
 var options = {tokens: true, tolerant: true, loc: true, range: true};
 var fs = require("fs");
-var builders = {};
+var conditionalStatements = ['IfStatement', 'ForInStatement', 'ForStatement', 'WhileStatement', 'SwitchStatement', 'DoWhileStatement'];
 
 function main() {
     var args = process.argv.slice(2);
 
     if (args.length == 0) {
-        args = ["test.js"];
+        args = ["analysis.js"];
     }
     var filePath = args[0];
 
@@ -21,22 +21,25 @@ function main() {
 
 }
 
+
+var builders = {};
+
 // Represent a reusable "class" following the Builder pattern.
 function FunctionBuilder() {
     this.StartLine = 0;
     this.FunctionName = "";
-    // Number of Returns in a file
-    this.Returns = 0;
     // The number of parameters for functions
     this.ParameterCount = 0,
         // Number of if statements/loops + 1
-    this.SimpleCyclomaticComplexity = 0;
+        this.SimpleCyclomaticComplexity = 1;
     // The max depth of scopes (nested ifs, loops, etc)
     this.MaxNestingDepth = 0;
     // The max number of conditions if one decision statement.
     this.MaxConditions = 0;
-    // Max message chain
-    this.MaxMessageChain = 0;
+    //Number of return statements.
+    this.ReturnCount = 0;
+    //The max length of a message chain in a function
+    this.MaxMessageChains = 0;
 
     this.report = function () {
         console.log(
@@ -46,11 +49,13 @@ function FunctionBuilder() {
                 "SimpleCyclomaticComplexity: {2}\t" +
                 "MaxNestingDepth: {3}\t" +
                 "MaxConditions: {4}\t" +
-                "Parameters: {5}\n\n"
+                "Parameters: {5}\t" +
+                "ReturnStatements: {6}\t" +
+                "MaxMessageChains: {7}\n\n"
             )
                 .format(this.FunctionName, this.StartLine,
                     this.SimpleCyclomaticComplexity, this.MaxNestingDepth,
-                    this.MaxConditions, this.ParameterCount)
+                    this.MaxConditions, this.ParameterCount, this.ReturnCount, this.MaxMessageChains)
         );
     }
 };
@@ -61,17 +66,20 @@ function FileBuilder() {
     // Number of strings in a file.
     this.Strings = 0;
     // Number of imports in a file.
-    this.ImportCount = 0;
-    // Count all conditions
-    this.AllConditions = 0;
+    this.PackageComplexity = 0;
+
+    this.FileConditions = 0;
+
+    this.SimpleCyclomaticComplexity = 0;
 
     this.report = function () {
         console.log(
             ( "{0}\n" +
                 "~~~~~~~~~~~~\n" +
-                "ImportCount {1}\t" +
-                "Strings {2}\n"
-            ).format(this.FileName, this.ImportCount, this.Strings));
+                "PackageComplexity {1}\t" +
+                "Strings {2}\t" +
+                "FileConditions {3}\n"
+            ).format(this.FileName, this.PackageComplexity, this.Strings, this.FileConditions));
     }
 }
 
@@ -93,20 +101,47 @@ function traverseWithParents(object, visitor) {
     }
 }
 
-function findNestedMessageLength(object, count , type) {
+//Method to find the nested count of a particular type
+function getNestedCount(object, count, type) {
     var key, child;
 
+    if (type.includes(object.type)) {
+        count += 1;
+    }
 
     for (key in object) {
         if (object.hasOwnProperty(key)) {
             child = object[key];
-            if (typeof child === type && child !== null) {
+            if (typeof child === 'object' && child !== null && key != 'parent') {
                 child.parent = object;
-                count = findNestedMessageLength(child,count + 1);
+                count = getNestedCount(child, count, type);
             }
         }
     }
+    return count;
+}
 
+function getMaxDepth(object, count, type, key) {
+    var key, child;
+
+    //console.log(object.key)
+
+    if (type.includes(object.type) && 'alternate' != key) {
+        count += 1;
+    }
+
+    for (key in object) {
+        if (object.hasOwnProperty(key)) {
+            child = object[key];
+            if (typeof child === 'object' && child !== null && key != 'parent') {
+                child.parent = object;
+                var newcount = getMaxDepth(child, count, type, key);
+                if (newcount > count) {
+                    count = newcount;
+                }
+            }
+        }
+    }
     return count;
 }
 
@@ -115,50 +150,76 @@ function complexity(filePath) {
     var buf = fs.readFileSync(filePath, "utf8");
     var ast = esprima.parse(buf, options);
 
-    var i = 0;
-
     // A file level-builder:
     var fileBuilder = new FileBuilder();
     fileBuilder.FileName = filePath;
-    fileBuilder.ImportCount = 0;
+    fileBuilder.PackageComplexity = 0;
+    fileBuilder.MaxMessageChains = 0;
+    fileBuilder.MaxConditions = 0;
     builders[fileBuilder.filePath] = fileBuilder;
-
 
     // Traverse program with a function visitor.
     traverseWithParents(ast, function (node) {
+
         if (node.type === 'FunctionDeclaration') {
             var builder = new FunctionBuilder();
+
             builder.FunctionName = functionName(node);
             builder.StartLine = node.loc.start.line;
-            builder.ParameterCount += node.params.length;
-
-            traverseWithParents(node, function (node) {
-                if (isDecision(node)) {
-                    builder.SimpleCyclomaticComplexity += 1;
-                }
-                if (node.type == 'ReturnStatement') {
-                    builder.Returns++;
-                }
-                if (node.type == 'ExpressionStatement'){
-                    var messageLength = findNestedMessageLength(node,0,'MemberExpression');
-                    if(builder.MaxMessageChain < messageLength){
-                        builder.MaxMessageChain = messageLength;
-                    }
-                }
-            });
+            builder.ParameterCount = node.params.length;
+            builder.MaxMessageChains = 0;
 
             builders[builder.FunctionName] = builder;
 
-        } else if (node.type == 'Literal' && typeof(node.value) == "string") {
-            fileBuilder.Strings++;
-        } else if (node.type == 'Identifier' && node.name == 'require') {
-            fileBuilder.ImportCount++;
-        } else if(isDecision(node) || node.operator == "&&" || node.operator=="||" ){
-            fileBuilder.AllConditions++;
+            traverseWithParents(node, function (child) {
+
+                if (isDecision(child)) {
+                    builder.SimpleCyclomaticComplexity += 1;
+                }
+                if (child.type === 'ReturnStatement') {
+                    builder.ReturnCount += 1;
+                }
+                if (child.type === 'MemberExpression') {
+                    var currentCount = getNestedCount(child, 0, ['MemberExpression']);
+
+                    if (currentCount > builder.MaxMessageChains)
+                        builder.MaxMessageChains = currentCount;
+                }
+                if (child.type === 'IfStatement') {
+                    var currentCount = getNestedCount(child.test, 1, ['LogicalExpression']);
+                    if (currentCount > builder.MaxConditions)
+                        builder.MaxConditions = currentCount;
+                }
+                if (conditionalStatements.includes(child.type)) {
+                    var currentCount = getMaxDepth(child, 0, conditionalStatements, null);
+                    if (currentCount > builder.MaxNestingDepth)
+                        builder.MaxNestingDepth = currentCount;
+                }
+            });
+
         }
 
-    });
+        if (node.type === 'Literal' && typeof(node.value) === 'string') {
+            fileBuilder.Strings += 1;
+        }
 
+        if (isDecision(node) || node.operator === '&&' || node.operator === '||') {
+            fileBuilder.FileConditions += 1;
+        }
+
+
+        //count for number of if statement
+        if (isDecision(node)) {
+            fileBuilder.SimpleCyclomaticComplexity += 1;
+        }
+
+
+        if (node.type === 'Identifier' && node.name === 'require') {
+            fileBuilder.PackageComplexity += 1;
+        }
+
+
+    });
 
 }
 
