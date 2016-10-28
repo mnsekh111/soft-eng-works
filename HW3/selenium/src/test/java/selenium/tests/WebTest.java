@@ -40,6 +40,7 @@ public class WebTest {
     }
 
 
+    //
     @Test
     public void Closed() throws Exception {
         driver.get("http://www.checkbox.io/studies.html");
