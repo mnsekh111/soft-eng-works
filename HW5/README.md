@@ -1,5 +1,5 @@
 ## HW5
-### Submitted by Sekharan Natarajan (smntara)
+### Submitted by Sekharan Natarajan (smnatara)
 
 #### What is Ansible :
 Great video : https://www.youtube.com/watch?v=UfD0BASLcJ0
@@ -7,7 +7,8 @@ Great video : https://www.youtube.com/watch?v=UfD0BASLcJ0
 
 Steps which I have followed:
 
-** In order to test Part 1 and Par 2 of this HW **
+**In order to test Part 1 and Part 2 of this HW**
+
 1. Create two VM's (One where Ansible will be installed and the other is a node where ansible will run the instructions in playbook )
 
 2. Follow the setup as mentioned in [class](https://github.com/CSC-510/Course/blob/master/Materials/CM.md) to setup communication between the nodes by placing the keys in `~/keys/node0.key`
@@ -21,7 +22,8 @@ Run sudo ansible-playbook --inventory=inventory tasks.yaml
 to test part 2
 
 
-** In order to test Bonus : **
+**In order to test Bonus :**
+
 1. First create a AWS developer account and set the access and paste it in the aws_access_key and aws_secret_key field of the ec2 module
 
 2. Then create a security group to open up ports to open up port 22 . Call it `inbound`
