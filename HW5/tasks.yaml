@@ -1,28 +1,36 @@
 - name: Tasks
   hosts: node0
+  sudo: yes
+
   vars:
-    dest_dir : /home/vagrant/github/App
+   - home_dir: /home/vagrant
+   - app_dir: App
+   - temp_dir: /tmp/
 
   tasks:
-  - name: Run app forever
-    command: forever start "{{ dest_dir }}/main.js" 8000
-  - name: Install bash, openssl, openssh-client, and openssh-server
-    sudo: yes
-    apt: name={{item}} state=latest
-    with_items:
-       - bash
-       - openssl
-       - openssh-client
-       - openssh-server
+   - name: Run webserver
+     command: forever start "{{home_dir}}/{{app_dir}}/main.js" 8000
 
-  - name: Delete everything in /tmp/*
-    sudo: yes
-    file:
-      path : /tmp/
-      state : absent
+   - name: Security
+     apt: name={{ item }} state=latest
+     with_items:
+      - bash
+      - openssl
+      - openssh-client
+      - openssh-server
 
-  - name: Recreate /tmp
-    sudo: yes
-    file:
-      path : /tmp/
-      state : directory
+   - shell: ls -1 "{{temp_dir}}"
+     register: contents
+
+   - name: Cleanup
+     file:
+      path: "{{ temp_dir }}{{ item }}"
+      state: absent
+     with_items:
+       - "{{ contents.stdout_lines}}"
+
+
+
+
+
+
