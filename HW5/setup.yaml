@@ -1,0 +1,116 @@
+---
+- name: Setup
+  hosts: node0
+  sudo: yes
+  gather_facts : no
+  vars:
+    dest_addr: /home/vagrant/github/App
+
+  # remote_user: vagrant
+  tasks:
+  - name: Update apt-get cache
+    sudo: yes
+    apt: 
+      update_cache: true 
+      cache_valid_time: 1800
+
+  - name: Install nodejs
+    sudo: yes
+    apt: 
+      name: nodejs
+      state: present
+
+  - name: Install npm
+    apt: 
+      name : npm 
+      state: present
+
+  - name: Install nodejs legacy
+    apt: 
+      name: nodejs-legacy 
+      state: present
+
+  - name: Install forever
+    sudo: yes
+    npm: 
+      name: forever 
+      global: yes 
+      state: present
+
+  - name: Install git
+    sudo: yes
+    apt: 
+      name: git 
+      state: present 
+      update_cache: true
+
+  - name: git clone repo
+    git: 
+      repo: https://github.com/CSC-DevOps/App.git 
+      dest: "{{ dest_addr }}"
+      clone: yes
+
+  - name: Install all npm packages
+    sudo: yes
+    npm:
+      global: no
+      path: "{{ dest_addr }}"
+      state: present
+---
+- name: Setup
+  hosts: node0
+  sudo: yes
+  gather_facts : no
+  vars:
+    dest_addr: /home/vagrant/github/App
+
+  # remote_user: vagrant
+  tasks:
+  - name: Update apt-get cache
+    sudo: yes
+    apt: 
+      update_cache: true 
+      cache_valid_time: 1800
+
+  - name: Install nodejs
+    sudo: yes
+    apt: 
+      name: nodejs
+      state: present
+
+  - name: Install npm
+    apt: 
+      name : npm 
+      state: present
+
+  - name: Install nodejs legacy
+    apt: 
+      name: nodejs-legacy 
+      state: present
+
+  - name: Install forever
+    sudo: yes
+    npm: 
+      name: forever 
+      global: yes 
+      state: present
+
+  - name: Install git
+    sudo: yes
+    apt: 
+      name: git 
+      state: present 
+      update_cache: true
+
+  - name: git clone repo
+    git: 
+      repo: https://github.com/CSC-DevOps/App.git 
+      dest: "{{ dest_addr }}"
+      clone: yes
+
+  - name: Install all npm packages
+    sudo: yes
+    npm:
+      global: no
+      path: "{{ dest_addr }}"
+      state: present
